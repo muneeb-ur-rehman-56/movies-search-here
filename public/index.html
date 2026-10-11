@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CineWorld - Search movies from every country</title>
+<meta name="description" content="Search movies from all over the world and browse Hindi, Punjabi, English and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  colors: { ink: '#090c1c', panel: '#121733', line: '#232a52', violet: '#7c5cff', rose: '#ff4d6d', gold: '#ffc857', mist: '#a7aed6' },
+  fontFamily: { display: ['Sora', 'sans-serif'], body: ['DM Sans', 'sans-serif'] }
+}}};
+</script>
+<link rel="stylesheet" href="style.css">
+<script src="ads.js"></script>
+</head>
+<body class="bg-ink text-white font-body antialiased">
+
+<header class="fixed top-0 inset-x-0 z-40 backdrop-blur-md bg-ink/80 border-b border-line">
+  <div class="max-w-7xl mx-auto px-4 h-16 flex items-center gap-4">
+    <a href="#" id="logo" class="font-display font-extrabold text-xl tracking-tight shrink-0">Cine<span class="text-rose">World</span></a>
+    <form id="searchForm" class="flex-1 max-w-xl relative" role="search">
+      <input id="searchInput" type="search" autocomplete="off" placeholder="Search any movie in the world"
+        class="w-full bg-panel border border-line rounded-full pl-11 pr-4 py-2.5 text-sm placeholder-mist focus:outline-none focus:border-violet focus:ring-2 focus:ring-violet/40">
+      <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-mist" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    </form>
+    <nav id="topNav" class="hidden lg:flex items-center gap-1 text-sm text-mist"></nav>
+  </div>
+</header>
+
+<main class="pt-16">
+  <section id="hero" class="relative h-[68vh] min-h-[420px] overflow-hidden">
+    <div id="heroBg" class="absolute inset-0 bg-cover bg-center transition-opacity duration-700"></div>
+    <div class="absolute inset-0 hero-fade"></div>
+    <div class="relative max-w-7xl mx-auto px-4 h-full flex flex-col justify-end pb-14">
+      <p class="text-gold text-sm font-medium mb-2">Trending worldwide this week</p>
+      <h1 id="heroTitle" class="font-display font-extrabold text-4xl md:text-6xl max-w-3xl leading-[1.05]">Find your next movie</h1>
+      <p id="heroText" class="mt-4 max-w-2xl text-mist line-clamp-3"></p>
+      <div class="mt-6 flex gap-3">
+        <button id="heroBtn" class="btn-main hidden">View details</button>
+        <a href="#sections" class="btn-ghost">Browse by language</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top banner: 728x90 on desktop/tablet, 320x50 on phones -->
+  <script>adBanner('728x90', 768); adBanner('320x50', 0, 768);</script>
+
+  <div id="error" class="hidden max-w-7xl mx-auto px-4 mt-6"><p class="rounded-xl border border-rose/50 bg-rose/10 text-rose px-4 py-3 text-sm"></p></div>
+
+  <div class="max-w-7xl mx-auto xl:grid xl:grid-cols-[minmax(0,1fr)_300px] xl:gap-6">
+  <div class="min-w-0">
+  <section id="results" class="hidden max-w-7xl mx-auto px-4 py-10">
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+      <div>
+        <h2 id="resultsTitle" class="font-display font-bold text-2xl"></h2>
+        <p id="resultsCount" class="text-sm text-mist mt-1"></p>
+      </div>
+      <div class="flex items-center gap-2">
+        <label id="langLabel" for="langFilter" class="text-sm text-mist">Language</label>
+        <select id="langFilter" class="bg-panel border border-line rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet"></select>
+        <button id="backHome" class="btn-ghost !py-2">Back to home</button>
+      </div>
+    </div>
+    <div id="grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-5"></div>
+    <p id="empty" class="hidden text-center text-mist py-16">No movies found. Check the spelling or try another title.</p>
+    <div class="text-center mt-10"><button id="loadMore" class="btn-main hidden">Load more movies</button></div>
+  </section>
+
+  <div id="sections" class="px-4 py-10 space-y-12"></div>
+
+  <!-- Native Banner (moved between the language sections by app.js) -->
+  <div id="nativeSlot" class="px-4 my-8 mx-auto max-w-3xl">
+    <script async="async" data-cfasync="false" src="https://bancadeltempoidea.org/21/11928bb0cf8f3d334fa632bc45b187f4"></script>
+    <div id="container-11928bb0cf8f3d334fa632bc45b187f4"></div>
+  </div>
+
+  <!-- Bottom ads: 300x250 only where the sidebar is hidden, 468x60 on wider phones and up -->
+  <div class="px-4 pb-6">
+    <script>adBanner('300x250', 0, 1280); adBanner('468x60', 520);</script>
+  </div>
+  </div>
+
+  <!-- Sidebar ads (large screens only) -->
+  <aside class="hidden xl:flex flex-col items-center gap-6 pr-4 py-10">
+    <script>adBanner('300x250', 1280); adBanner('160x600', 1280); adBanner('160x300', 1280);</script>
+  </aside>
+  </div>
+</main>
+
+<footer class="border-t border-line mt-10 py-8 text-center text-sm text-mist px-4">
+  <p class="font-display font-bold text-white mb-1">Cine<span class="text-rose">World</span></p>
+  <p>Class project built with HTML, CSS, Tailwind and Node.js.</p>
+  <p class="mt-2"><a class="underline hover:text-white" href="#" id="footerSponsor" target="_blank" rel="noopener sponsored">Sponsored link</a></p>
+  <p class="mt-1">Movie data and images by TMDB. This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
+</footer>
+
+<div id="modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm overflow-y-auto" role="dialog" aria-modal="true" aria-label="Movie details">
+  <div class="min-h-full flex items-center justify-center p-4">
+    <div id="modalBox" class="relative w-full max-w-4xl bg-panel border border-line rounded-2xl overflow-hidden">
+      <button id="closeModal" aria-label="Close" class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-ink/80 hover:bg-rose text-lg leading-none transition-colors">&times;</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script>document.getElementById('footerSponsor').href = ADS_SMARTLINK;</script>
+
+<!-- Social Bar -->
+<script data-cfasync="false" src="https://bancadeltempoidea.org/14/c21fba9e0184ab1b58d144fb3d70f5b6"></script>
+<!-- Popunder -->
+<script data-cfasync="false" src="https://aarems.org/1/28944f5c7be817aeb79b1f976dd209c6"></script>
+</body>
+</html>
